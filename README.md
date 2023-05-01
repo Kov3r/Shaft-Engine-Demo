@@ -1,4 +1,4 @@
-# A Template for using [SHAFT_Engine](https://github.com/shafthq/SHAFT_ENGINE)
+# Customized template for using [SHAFT_Engine](https://github.com/shafthq/SHAFT_ENGINE)
 <img src="https://github.com/ShaftHQ/SHAFT_ENGINE/raw/main/src/main/resources/images/shaft.png" alt="SHAFT_ENGINE" style="display:block; margin-left:auto; margin-right:auto;"/>
 
 <a id="quick-start-guide"></a>
