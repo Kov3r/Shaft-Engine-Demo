@@ -43,12 +43,7 @@
 ### Stop Reinventing the wheel! Start using SHAFT!
 
 📝 Project Features:
-Java
-Selenium Webdriver
-TestNG
-Allure Report
-Extent Reports
-Remote Execution { Selenium Grid4 & Docker Compose }
+Java, Selenium Webdriver, TestNG, Allure Report, Extent Reports, Remote Execution (Selenium Grid4 & Docker Compose)
 
 🏗️ Project Design:
 -Page Object Model (POM) design pattern
