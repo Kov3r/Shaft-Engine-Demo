@@ -43,16 +43,20 @@
 ### Stop Reinventing the wheel! Start using SHAFT!
 
 📝 Project Features:
+
 Java, Selenium Webdriver, TestNG, Allure Report, Extent Reports, Remote Execution (Selenium Grid4 & Docker Compose)
 
 🏗️ Project Design:
+
 -Page Object Model (POM) design pattern
 -Data Driven framework
 -Fluent design approach
 -Java Docs
 
 🔍️ Covered Test cases in this project:
+
 ✅Test Case 1: Register User
+
 1-Launch browser
 2-Navigate to url
 3-✏️Verify that Currency, price, bundle type are valid
