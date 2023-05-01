@@ -1,0 +1,18 @@
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+                                        Starting Execution: '2 out of 4' test cases in the current suite                                        
+                                            Test Method: 'GuiTests.EgTest.Validate_data_in_home_page'                                            
+                                          Test Description: 'Check if Price, Currency, Type are valid '                                          
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+[ReportManager] Target URL: "nulleg-en" @01-05-2023 12:49:43.0076 PM
+[ReportManager] Navigate to url "nulleg-en". @01-05-2023 12:49:43.0092 PM
+[ReportManager] Expected condition failed: waiting for com.shaft.gui.element.internal.ElementActionsHelper$$Lambda$840/0x0000000801594c00@3be5b40d (tried for 60 second(s) with 100 milliseconds interval) || no such element: Unable to locate element: {"method":"xpath","selector":"/html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4"} @01-05-2023 12:50:43.0136 PM
+[ReportManager] Failed to Get text from "By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4". @01-05-2023 12:50:43.0136 PM
+[ReportManager] Assertion "ValidateElementAttribute" FAILED. Expected "Value Should be 'CLASSIC' for the 'text' attribute, element locator 'By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4'" and Actual "Failed to read the desired element attribute". Comparison Type "CONTAINS". Validation Type "POSITIVE". @01-05-2023 12:50:43.0917 PM
+[ReportManager] Assertion Failed: Verify type is valid @01-05-2023 12:50:43.0917 PM
+[ReportManager] Successfully created attachment 'Screenshot - 1682938243293_Validate_data_in_home_page_ValidateElementAttribute_failed' @01-05-2023 12:50:43.0923 PM
+[ReportManager] Successfully created attachment 'Validation Test Data - Failure Reason' @01-05-2023 12:50:43.0924 PM
+[ReportManager] Assertion "ValidateElementAttribute" FAILED. Expected "Value Should be 'CLASSIC' for the 'text' attribute, element locator 'By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4'" and Actual "Failed to read the desired element attribute". Comparison Type "CONTAINS". Validation Type "POSITIVE". Root cause: "java.lang.AssertionError: Failed to Get text from "By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4"." @01-05-2023 12:50:43.0925 PM
+[ReportManager] Successfully created attachment 'Validations helper - Get  stack  trace - Exception Stacktrace' @01-05-2023 12:50:43.0925 PM
+[ReportManager] Successfully created attachment 'SHAFT Engine Logs - Current Method log: beforeMethod' @01-05-2023 12:50:43.0927 PM

@@ -1,0 +1,731 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Extent Reports</title>
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@d6562a79075e061305ccfdb82f01e5e195e2d307/spark/css/spark-style.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@7cc78ce/spark/js/jsontree.js"></script>
+<style type="text/css"></style></head><body class="spa -report standard">
+  <div class="app">
+    <div class="layout">
+<div class="header navbar">
+<div class="vheader">
+<div class="nav-logo">
+<a href="#">
+<div class="logo" style="background-image: url('https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png')"></div>
+</a>
+</div>
+<ul class="nav-left">
+<li class="search-box">
+<a class="search-toggle" href="#">
+<i class="search-icon fa fa-search"></i>
+<i class="search-icon-close fa fa-close"></i>
+</a>
+</li>
+<li class="search-input"><input id="search-tests" class="form-control" type="text" placeholder="Search..."></li>
+</ul>
+<ul class="nav-right">
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">Extent Reports - Powered by SHAFT_Engine</span></a>
+</li>
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">May 1, 2023 12:49:20 PM</span></a>
+</li>
+</ul>
+</div>
+</div><div class="side-nav">
+<div class="side-nav-inner">
+<ul class="side-nav-menu">
+<li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+<a id="nav-dashboard" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bar-chart"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('test-view')">
+<a id="nav-test" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-list"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('exception-view')">
+<a id="nav-exception" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bug"></i></span>
+</a>
+</li>
+</ul>
+</div>
+</div>      <div class="vcontainer">
+        <div class="main-content">
+<div class="container-fluid p-4 view dashboard-view">
+<div class="row">
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Started</p>
+<h3>May 1, 2023 12:49:20 PM</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Ended</p>
+<h3>May 1, 2023 12:51:15 PM</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-pass">Tests Passed</p>
+<h3>0</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-fail">Tests Failed</p>
+<h3>4</h3>
+</div></div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Tests</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='parent-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='0%'>
+<b>0</b> tests passed
+</small>
+</div>
+<div>
+<small data-tooltip='100%'><b>4</b> tests failed,
+<b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Log events</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='events-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='0%'><b>0</b> events passed</small></div>
+<div>
+<small data-tooltip='23%'><b>4</b> events failed,
+<b data-tooltip='%'>13</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-md-12">
+<div class="card"><div class="card-header"><p>Timeline</p></div>
+<div class="card-body pt-0"><div>
+<canvas id="timeline" height="120"></canvas>
+</div></div>
+</div>
+</div></div>
+<script>
+var timeline = {
+"Price, Currency, Type are valid ":9.371,"Check if Price, Currency, Type are valid ":60.859,"Price, Currency, Type are valid ":1.248,"Price, Currency, Type are valid ":1.787
+};
+</script>
+<div class="row">
+</div>
+</div>
+<script>
+var statusGroup = {
+parentCount: 5,
+passParent: 0,
+failParent: 4,
+warningParent: 0,
+skipParent: 0,
+childCount: 5,
+passChild: 0,
+failChild: 0,
+warningChild: 0,
+skipChild: 0,
+infoChild: 0,
+grandChildCount: 5,
+passGrandChild: 0,
+failGrandChild: 0,
+warningGrandChild: 0,
+skipGrandChild: 0,
+infoGrandChild: 0,
+eventsCount: 5,
+passEvents: 0,
+failEvents: 4,
+warningEvents: 0,
+skipEvents: 0,
+infoEvents: 13
+};
+</script><div class="test-wrapper row view test-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+<ul class="tools pull-left">
+<li><a href="#"><span class="font-size-14">Tests</span></a></li>
+</ul>
+<ul class="tools text-right">
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
+<ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" status="fail" href="#"><span>Fail</span><span class="status danger"></span></a>
+<div class="dropdown-divider"></div>
+<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+</ul>
+</li>
+</ul>
+</div>    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item"  status="fail" test-id="1"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Price, Currency, Type are valid </p>
+            <p class="text-sm">
+              <span>12:49:25 PM</span> / <span>00:00:09:371</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">Price, Currency, Type are valid </h5>
+<span class='badge badge-success'>05.01.2023 12:49:25 PM</span>
+<span class='badge badge-danger'>05.01.2023 12:49:35 PM</span>
+<span class='badge badge-default'>00:00:09:371</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:49:25 PM</td>
+        <td>
+          Navigate to url "nullba-en".
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:49:35 PM</td>
+        <td>
+          Assertion Failed: Verify type is valid
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:49:35 PM</td>
+        <td>
+          Assertion "ValidateElementAttribute" FAILED. Expected "Value Should be 'CLASSIC' for the 'text' attribute, element locator 'By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4'" and Actual "Failed to read the desired element attribute". Comparison Type "CONTAINS". Validation Type "POSITIVE". Root cause: "java.lang.AssertionError: Failed to Get text from "By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4"."
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>12:49:35 PM</td>
+        <td>
+          <textarea readonly class="code-block">java.lang.AssertionError: Assertion "ValidateElementAttribute" FAILED. Expected "Value Should be 'CLASSIC' for the 'text' attribute, element locator 'By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4'" and Actual "Failed to read the desired element attribute". Comparison Type "CONTAINS". Validation Type "POSITIVE". Root cause: "java.lang.AssertionError: Failed to Get text from "By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4"."
+	at org.testng.Assert.fail(Assert.java:98)
+	at com.shaft.tools.io.internal.FailureReporter.fail(FailureReporter.java:34)
+	at com.shaft.validation.internal.ValidationsHelper.reportValidationState(ValidationsHelper.java:735)
+	at com.shaft.validation.internal.ValidationsHelper.fail(ValidationsHelper.java:450)
+	at com.shaft.validation.internal.ValidationsHelper.validateElementAttribute(ValidationsHelper.java:165)
+	at com.shaft.validation.internal.ValidationsExecutor.perform(ValidationsExecutor.java:149)
+	at GuiTests.BaTest.Validate_data_in_home_page(BaTest.java:42)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:969)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:194)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:829)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:431)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:391)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:330)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1256)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1176)
+	at org.testng.TestNG.runSuites(TestNG.java:1099)
+	at org.testng.TestNG.run(TestNG.java:1067)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:155)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:169)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:88)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:137)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: java.lang.AssertionError: Failed to Get text from "By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4".
+	at org.testng.Assert.fail(Assert.java:110)
+	at com.shaft.gui.element.internal.ElementActionsHelper.failAction(ElementActionsHelper.java:937)
+	at com.shaft.gui.element.internal.ElementActionsHelper.failAction(ElementActionsHelper.java:869)
+	at com.shaft.gui.element.internal.FluentElementActions.getText(FluentElementActions.java:581)
+	at com.shaft.validation.internal.ValidationsHelper.validateElementAttribute(ValidationsHelper.java:154)
+	... 35 more
+</textarea>
+          
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="2"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Check if Price, Currency, Type are valid </p>
+            <p class="text-sm">
+              <span>12:49:43 PM</span> / <span>00:01:00:859</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">Check if Price, Currency, Type are valid </h5>
+<span class='badge badge-success'>05.01.2023 12:49:43 PM</span>
+<span class='badge badge-danger'>05.01.2023 12:50:43 PM</span>
+<span class='badge badge-default'>00:01:00:859</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=2</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:49:43 PM</td>
+        <td>
+          Navigate to url "nulleg-en".
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:50:43 PM</td>
+        <td>
+          Assertion Failed: Verify type is valid
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:50:43 PM</td>
+        <td>
+          
+    <div class="row mb-3"><div class="col-md-3">
+        <a href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAB4AAAAOUCAYAAABDqi5YAAA5v0lEQVR4XuzZMQ0AMAzAsPIn3f5jsMg+QyGzAAAAAAAAACTMGwAAAAAAAAD4kwEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAABAhAEMAAAAAAAAEGEAAwAAAAAAAEQYwAAAAAAAAAARBjAAAAAAAADAtXe33U0beRyGv/9X7JYWyDOQUBrIQvrAnl/2TC3/ZTm2IznpcF3nzNnGtsYjWby6V1InBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEYAAAAAAAAoBMCMAAAAAAAAEAnBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEYAAAAAAAAoBMCMAAAAAAAAEAnBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEYAAAAAAAAoBMCMAAAAAAAAEAnBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEYAAAAAAAAoBMCMAAAAAAAAEAnBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEYAAAAAAAAoBMCMAAAAAAAAEAnBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEYAAAAAAAAoBMCMAAAAAAAAEAnBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEYAAAAAAAAoBMCMAAAAAAAAEAnBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEYAAAAAAAAoBMCMAAAAAAAAEAnBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEYAAAAAAAAoBMCMAAAAAAAAEAnBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEYAAAAAAAAoBMCMAAAAAAAAEAnBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEYAAAAAAAAoBMCMAAAAAAAAEAnBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEYAAAAAAAAoBMCMAAAAAAAAEAnBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEYAAAAAAAAoBMCMAAAAAAAAEAnBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEYAAAAAAAAoBMCMAAAAAAAAEAnBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEYAAAAAAAAoBMCMAAAAAAAAEAnBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEYAAAAAAAAoBMCMAAAAAAAAEAnBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEYAAAAAAAAoBMCMAAAAAAAAEAnBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEYAAAAAAAAoBMCMAAAAAAAAEAnBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEYAAAAAAAAoBMCMAAAAAAAAEAnBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEYAAAAAAAAoBMCMAAAAAAAAEAnBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEYAAAAAAAAoBMCMAAAAAAAAEAnBGAAAAAAAACATgjAAAAAAAAAAJ0QgAEAAAAAAAA6IQADAAAAAAAAdEIABgAAAAAAAOiEAAwAAAAAAADQCQEY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" data-featherlight="image"><span class="badge badge-gradient-primary">base64 img</span></a>
+        
+    </div></div>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:50:43 PM</td>
+        <td>
+          Assertion "ValidateElementAttribute" FAILED. Expected "Value Should be 'CLASSIC' for the 'text' attribute, element locator 'By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4'" and Actual "Failed to read the desired element attribute". Comparison Type "CONTAINS". Validation Type "POSITIVE". Root cause: "java.lang.AssertionError: Failed to Get text from "By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4"."
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>12:50:43 PM</td>
+        <td>
+          <textarea readonly class="code-block">java.lang.AssertionError: Assertion "ValidateElementAttribute" FAILED. Expected "Value Should be 'CLASSIC' for the 'text' attribute, element locator 'By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4'" and Actual "Failed to read the desired element attribute". Comparison Type "CONTAINS". Validation Type "POSITIVE". Root cause: "java.lang.AssertionError: Failed to Get text from "By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4"."
+	at org.testng.Assert.fail(Assert.java:98)
+	at com.shaft.tools.io.internal.FailureReporter.fail(FailureReporter.java:34)
+	at com.shaft.validation.internal.ValidationsHelper.reportValidationState(ValidationsHelper.java:735)
+	at com.shaft.validation.internal.ValidationsHelper.fail(ValidationsHelper.java:450)
+	at com.shaft.validation.internal.ValidationsHelper.validateElementAttribute(ValidationsHelper.java:165)
+	at com.shaft.validation.internal.ValidationsExecutor.perform(ValidationsExecutor.java:149)
+	at GuiTests.EgTest.Validate_data_in_home_page(EgTest.java:42)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:969)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:194)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:829)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:431)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:391)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:330)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1256)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1176)
+	at org.testng.TestNG.runSuites(TestNG.java:1099)
+	at org.testng.TestNG.run(TestNG.java:1067)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:155)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:169)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:88)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:137)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: java.lang.AssertionError: Failed to Get text from "By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4".
+	at org.testng.Assert.fail(Assert.java:110)
+	at com.shaft.gui.element.internal.ElementActionsHelper.failAction(ElementActionsHelper.java:937)
+	at com.shaft.gui.element.internal.ElementActionsHelper.failAction(ElementActionsHelper.java:869)
+	at com.shaft.gui.element.internal.FluentElementActions.getText(FluentElementActions.java:581)
+	at com.shaft.validation.internal.ValidationsHelper.validateElementAttribute(ValidationsHelper.java:154)
+	... 35 more
+</textarea>
+          
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="3"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Price, Currency, Type are valid </p>
+            <p class="text-sm">
+              <span>12:50:44 PM</span> / <span>00:00:01:248</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">Price, Currency, Type are valid </h5>
+<span class='badge badge-success'>05.01.2023 12:50:44 PM</span>
+<span class='badge badge-danger'>05.01.2023 12:50:45 PM</span>
+<span class='badge badge-default'>00:00:01:248</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=3</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:50:44 PM</td>
+        <td>
+          Navigate to url "nullku-en".
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:50:45 PM</td>
+        <td>
+          Assertion Failed: Verify type is valid
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:50:45 PM</td>
+        <td>
+          Assertion "ValidateElementAttribute" FAILED. Expected "Value Should be 'CLASSIC' for the 'text' attribute, element locator 'By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4'" and Actual "Failed to read the desired element attribute". Comparison Type "CONTAINS". Validation Type "POSITIVE". Root cause: "java.lang.AssertionError: Failed to Get text from "By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4"."
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>12:50:45 PM</td>
+        <td>
+          <textarea readonly class="code-block">java.lang.AssertionError: Assertion "ValidateElementAttribute" FAILED. Expected "Value Should be 'CLASSIC' for the 'text' attribute, element locator 'By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4'" and Actual "Failed to read the desired element attribute". Comparison Type "CONTAINS". Validation Type "POSITIVE". Root cause: "java.lang.AssertionError: Failed to Get text from "By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4"."
+	at org.testng.Assert.fail(Assert.java:98)
+	at com.shaft.tools.io.internal.FailureReporter.fail(FailureReporter.java:34)
+	at com.shaft.validation.internal.ValidationsHelper.reportValidationState(ValidationsHelper.java:735)
+	at com.shaft.validation.internal.ValidationsHelper.fail(ValidationsHelper.java:450)
+	at com.shaft.validation.internal.ValidationsHelper.validateElementAttribute(ValidationsHelper.java:165)
+	at com.shaft.validation.internal.ValidationsExecutor.perform(ValidationsExecutor.java:149)
+	at GuiTests.KuTest.Validate_data_in_home_page(KuTest.java:42)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:969)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:194)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:829)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:431)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:391)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:330)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1256)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1176)
+	at org.testng.TestNG.runSuites(TestNG.java:1099)
+	at org.testng.TestNG.run(TestNG.java:1067)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:155)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:169)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:88)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:137)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: java.lang.AssertionError: Failed to Get text from "By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4".
+	at org.testng.Assert.fail(Assert.java:110)
+	at com.shaft.gui.element.internal.ElementActionsHelper.failAction(ElementActionsHelper.java:937)
+	at com.shaft.gui.element.internal.ElementActionsHelper.failAction(ElementActionsHelper.java:869)
+	at com.shaft.gui.element.internal.FluentElementActions.getText(FluentElementActions.java:581)
+	at com.shaft.validation.internal.ValidationsHelper.validateElementAttribute(ValidationsHelper.java:154)
+	... 35 more
+</textarea>
+          
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="fail" test-id="4"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Price, Currency, Type are valid </p>
+            <p class="text-sm">
+              <span>12:50:59 PM</span> / <span>00:00:01:787</span>
+              <span class="badge fail-bg log float-right">Fail</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-fail">Price, Currency, Type are valid </h5>
+<span class='badge badge-success'>05.01.2023 12:50:59 PM</span>
+<span class='badge badge-danger'>05.01.2023 12:51:01 PM</span>
+<span class='badge badge-default'>00:00:01:787</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=4</span>
+<span class='badge badge-default pointer float-right ml-1 et'><i class="fa fa-chevron-down"></i></span>
+<span class='badge badge-default pointer float-right ct'><i class="fa fa-chevron-up"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:50:59 PM</td>
+        <td>
+          Navigate to url "nullsa-en".
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:51:01 PM</td>
+        <td>
+          Assertion Failed: Verify type is valid
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>12:51:01 PM</td>
+        <td>
+          Assertion "ValidateElementAttribute" FAILED. Expected "Value Should be 'CLASSIC' for the 'text' attribute, element locator 'By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4'" and Actual "Failed to read the desired element attribute". Comparison Type "CONTAINS". Validation Type "POSITIVE". Root cause: "java.lang.AssertionError: Failed to Get text from "By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4"."
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log fail-bg">Fail</span></td>
+        <td>12:51:01 PM</td>
+        <td>
+          <textarea readonly class="code-block">java.lang.AssertionError: Assertion "ValidateElementAttribute" FAILED. Expected "Value Should be 'CLASSIC' for the 'text' attribute, element locator 'By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4'" and Actual "Failed to read the desired element attribute". Comparison Type "CONTAINS". Validation Type "POSITIVE". Root cause: "java.lang.AssertionError: Failed to Get text from "By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4"."
+	at org.testng.Assert.fail(Assert.java:98)
+	at com.shaft.tools.io.internal.FailureReporter.fail(FailureReporter.java:34)
+	at com.shaft.validation.internal.ValidationsHelper.reportValidationState(ValidationsHelper.java:735)
+	at com.shaft.validation.internal.ValidationsHelper.fail(ValidationsHelper.java:450)
+	at com.shaft.validation.internal.ValidationsHelper.validateElementAttribute(ValidationsHelper.java:165)
+	at com.shaft.validation.internal.ValidationsExecutor.perform(ValidationsExecutor.java:149)
+	at GuiTests.SaTest.Validate_data_in_home_page(SaTest.java:42)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:969)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:194)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:829)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:431)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:391)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:330)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1256)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1176)
+	at org.testng.TestNG.runSuites(TestNG.java:1099)
+	at org.testng.TestNG.run(TestNG.java:1067)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:155)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:169)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:88)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:137)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: java.lang.AssertionError: Failed to Get text from "By.xpath: /html/body/div[1]/div[3]/div/div/div/div[1]/div[2]/h4".
+	at org.testng.Assert.fail(Assert.java:110)
+	at com.shaft.gui.element.internal.ElementActionsHelper.failAction(ElementActionsHelper.java:937)
+	at com.shaft.gui.element.internal.ElementActionsHelper.failAction(ElementActionsHelper.java:869)
+	at com.shaft.gui.element.internal.FluentElementActions.getText(FluentElementActions.java:581)
+	at com.shaft.validation.internal.ValidationsHelper.validateElementAttribute(ValidationsHelper.java:154)
+	... 35 more
+</textarea>
+          
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<div class="test-content scrollable">
+<div class="test-content-tools">
+<ul><li><a class="back-to-test" href="#"><i class="fa fa-arrow-left"></i></a></li></ul>
+</div>
+<div class="test-content-detail"><div class="detail-body"></div></div>
+</div></div>
+<div class="test-wrapper row view exception-view attributes-view">
+<div class="test-list">
+<div class="test-list-tools">
+<ul class="tools pull-left"><li><a href=""><span class="font-size-14">Exception</span></a></li></ul>
+<ul class="tools text-right"><li><a href="#"><span class="badge badge-primary">1</span></a></li></ul>
+</div>
+<div class="test-list-wrapper scrollable">
+<ul class="test-list-item">
+<li class="test-item">
+<div class="test-detail">
+<span class="meta">
+<span class='badge log badge-danger'>4</span>
+</span>
+<p class="name">java.lang.AssertionError</p>
+<p class="duration text-sm">4 tests</p>
+</div>
+<div class="test-contents d-none">
+<div class="info">
+<h4>java.lang.AssertionError</h4>
+<span status="fail" class='badge log badge-danger'>4 failed</span>
+</div>
+<table class='table table-sm mt-4'>
+<thead>
+<tr>
+<th class="status-col">Status</th>
+<th class="timestamp-col">Timestamp</th>
+<th>TestName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>12:49:25 PM</td>
+<td>
+<a href="#" class="linked" test-id='1' id='1'>Price, Currency, Type are valid </a>
+</td>
+</tr>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>12:49:43 PM</td>
+<td>
+<a href="#" class="linked" test-id='2' id='2'>Check if Price, Currency, Type are valid </a>
+</td>
+</tr>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>12:50:44 PM</td>
+<td>
+<a href="#" class="linked" test-id='3' id='3'>Price, Currency, Type are valid </a>
+</td>
+</tr>
+<tr class="tag-test-status" status="fail">
+<td><span class="badge log fail-bg">Fail</span></td>
+<td>12:50:59 PM</td>
+<td>
+<a href="#" class="linked" test-id='4' id='4'>Price, Currency, Type are valid </a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="test-content scrollable">
+<div class="test-content-detail">
+<div class="detail-body"></div>
+</div>
+</div>
+</div>        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@d6562a79075e061305ccfdb82f01e5e195e2d307/spark/js/spark-script.js"></script>
+<script type="text/javascript"></script></body>
+</html>
